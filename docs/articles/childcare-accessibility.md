@@ -71,13 +71,13 @@ demand and distance. The initial interaction is defined as:
 
 ``` r
 
-distance_matrix <- compute_distance_matrix(
+distance_matrix <- distance_matrix(
   supply = supply,
   demand = demand,
   min_distance = 400
 )
 
-allocation <- gravity_allocate(
+allocation <- gravity(
   supply = supply,
   demand = demand,
   distance_matrix = distance_matrix,

@@ -19,4 +19,4 @@ supply
 \description{
 A data frame containing childcare locations and capacity.
 }
-\keyword{datasets}
+\keyword{internal}

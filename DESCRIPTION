@@ -1,8 +1,9 @@
 Package: gravitr
 Title: Gravity-Based Allocation Models
 Version: 0.9
-Authors@R: 
-    person("Hugo", "Perilleux", email = "hugoperilleux@gmail.com", role = c("aut", "cre"))
+Authors@R: c(
+    person("Hugo", "Perilleux", email = "hugoperilleux@gmail.com", role = c("aut", "cre")),
+    person("Pierre", "Marissal", role = c("aut")))
 Description: An R package for gravity-model allocation of supply and demand using the Furness convergence algorithm.
 License: CC BY-NC 4.0
 Encoding: UTF-8

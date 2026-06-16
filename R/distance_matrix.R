@@ -10,7 +10,7 @@
 #'
 #' @return A numeric matrix with supply units in rows and demand units in columns.
 #' @export
-compute_distance_matrix <- function(
+distance_matrix <- function(
     supply,
     demand,
     supply_x = "x",

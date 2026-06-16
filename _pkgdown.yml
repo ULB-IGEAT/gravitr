@@ -6,14 +6,26 @@ template:
 
 navbar:
   structure:
-    left: [intro, reference, articles]
+    left: [intro, reference, examples]
     right: [search, github]
 
-
-components:
-  developed_by: "Developed by IGEAT-ULB"
-  examples:
+  components:
+    examples:
       text: Examples
-      menu:
-      - text: Childcare accessibility
-        href: articles/childcare-accessibility.html
+      href: articles/childcare-accessibility.html
+
+footer:
+  structure:
+    left: custom
+    right:
+
+  components:
+    custom: "Developed by IGEAT-ULB."
+
+
+reference:
+- title: "Main Fonctions"
+  desc: ""
+  contents:
+  - distance_matrix
+  - gravity

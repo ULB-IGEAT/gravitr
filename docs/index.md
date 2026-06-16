@@ -1,6 +1,6 @@
 # gravitR
 
-![](reference/figures/logo_old.png)
+![IGEAT logo](reference/figures/logo_old.png)
 
 Gravity-based allocation models for accessibility analysis.
 
@@ -31,7 +31,8 @@ devtools::install_github("ULB-IGEAT/gravitr")
 Institute for Environmental Management and Land-Use Planning (IGEAT),
 Université libre de Bruxelles (ULB).
 
-[![](reference/figures/logo_ulb_igeat.png)](https://gag.sciences.ulb.be/)
+[![IGEAT
+logo](reference/figures/logo_ulb_igeat.png)](https://gag.sciences.ulb.be/)
 
 ## Other packages
 
@@ -39,6 +40,5 @@ Université libre de Bruxelles (ULB).
 
 Geocoding and spatial analysis tools for Belgium.
 
-[![](reference/figures/logo_phacochr.png)](https://phacochr.github.io/phacochr)
-
-<https://phacochr.github.io/phacochr/>
+[![PhacochR
+logo](reference/figures/logo_phacochr.png)](https://phacochr.github.io/phacochr)

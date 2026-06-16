@@ -13,7 +13,7 @@
 #'
 #' @return A list containing flows, weighted distances, summaries and convergence information.
 #' @export
-gravity_allocate <- function(
+gravity <- function(
     supply,
     demand,
     distance_matrix,

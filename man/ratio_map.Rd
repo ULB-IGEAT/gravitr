@@ -13,4 +13,4 @@ ratio_map
 \description{
 An sf object containing childcare supply, demand and local ratio by sector.
 }
-\keyword{datasets}
+\keyword{internal}

@@ -2,6 +2,8 @@
 #'
 #' A data frame containing demand locations and the number of children.
 #'
+#' @keywords internal
+#'
 #' @format A data frame with 4 columns:
 #' \describe{
 #'   \item{id}{Sector identifier.}
@@ -15,6 +17,8 @@
 #'
 #' A data frame containing childcare locations and capacity.
 #'
+#' @keywords internal
+#'
 #' @format A data frame with 4 columns:
 #' \describe{
 #'   \item{id}{Childcare facility identifier.}
@@ -27,6 +31,8 @@
 #' Sector-level childcare ratio map
 #'
 #' An sf object containing childcare supply, demand and local ratio by sector.
+#'
+#' @keywords internal
 #'
 #' @format An sf object with sector geometries and ratio variables.
 "ratio_map"

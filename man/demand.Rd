@@ -19,4 +19,4 @@ demand
 \description{
 A data frame containing demand locations and the number of children.
 }
-\keyword{datasets}
+\keyword{internal}

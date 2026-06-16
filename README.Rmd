@@ -2,7 +2,7 @@
 output: github_document
 ---
 
-<img src="man/figures/logo_ulb_igeat.png" width="200"  align="right" alt="IGEAT logo">
+<img src="man/figures/logo_old.png" width="200"  align="right" alt="IGEAT logo">
 
 
 ```{r, include = FALSE}
@@ -54,6 +54,3 @@ Geocoding and spatial analysis tools for Belgium.
 </a> <a href="https://phacochr.github.io/phacochr">
 <img src="man/figures/logo_phacochr.png" align="center" height="120/"  alt="PhacochR logo" >
 </a></center>
-
-
-https://phacochr.github.io/phacochr/

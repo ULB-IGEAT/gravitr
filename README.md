@@ -1,5 +1,5 @@
 
-<img src="man/figures/logo_ulb_igeat.png" width="200"  align="right" alt="IGEAT logo">
+<img src="man/figures/logo_old.png" width="200"  align="right" alt="IGEAT logo">
 
 # gravitR
 
@@ -46,5 +46,3 @@ Geocoding and spatial analysis tools for Belgium.
 <img src="man/figures/logo_phacochr.png" align="center" height="120/"  alt="PhacochR logo" >
 </a>
 </center>
-
-<https://phacochr.github.io/phacochr/>
