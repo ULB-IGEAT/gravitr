@@ -1,0 +1,122 @@
+---
+title: "Childcare accessibility with a gravity allocation model"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Childcare accessibility with a gravity allocation model}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r, message=FALSE}
+  
+library(gravitr)
+library(dplyr)
+library(sf)
+library(mapsf)
+library(phacochr)
+```
+
+## Why a simple ratio map is not enough
+
+A simple ratio map compares the number of childcare places with the number of children in each spatial unit. This is easy to read, but it assumes that demand is only served locally. This is a strong limitation, especially in dense urban areas where families may use childcare places outside their own sector.
+
+```{r}
+data(ratio_map)
+
+communes_bxl <- phacochr::phaco_data("communes_bxl")
+
+mf_map(ratio_map, col = NA, border = "grey")
+mf_map(communes_bxl, col = NA, border = "black", add = TRUE)
+
+mf_map(
+  ratio_map,
+  var = c("supply_sector", "ratio"),
+  type = "prop_choro",
+  pal = "Viridis",
+  nbreaks = 5,
+  inches = 0.08,
+  leg_title = c("Childcare places", "Places per 100 children"),
+  leg_pos = c("topright", "topleft"),
+  border = "black",
+  lwd = 0.3,
+  add = TRUE
+)
+
+mf_layout(
+  title = "Local ratio of childcare places to children",
+  credits = "IGEAT-ULB, 2026.",
+  arrow = FALSE,
+  frame = TRUE
+)
+```
+
+## Gravity-based allocation
+
+The gravity model allocates demand to supply according to capacity, demand and distance. The initial interaction is defined as:
+
+```{r}
+distance_matrix <- compute_distance_matrix(
+  supply = supply,
+  demand = demand,
+  min_distance = 400
+)
+
+allocation <- gravity_allocate(
+  supply = supply,
+  demand = demand,
+  distance_matrix = distance_matrix,
+  distance_power = 2,
+  max_iter = 100,
+  delta = 0.001,
+  verbose = TRUE
+)
+```
+
+## Mean distance from demand locations
+
+```{r}
+sec_bxl <- phacochr::phaco_data("sec_bxl")
+
+demand_map <- sec_bxl |>
+  left_join(allocation$demand, by = c("cd_sector2024" = "id"))
+
+supply_sf <- allocation$supply |>
+  st_as_sf(coords = c("x", "y"), crs = 31370)
+
+mf_map(demand_map, col = NA, border = "grey")
+mf_map(communes_bxl, col = NA, border = "black", add = TRUE)
+
+mf_map(
+  demand_map,
+  var = c("demand", "mean_distance"),
+  type = "prop_choro",
+  pal = "Viridis",
+  nbreaks = 6,
+  inches = 0.09,
+  leg_title = c("Children", "Mean distance"),
+  leg_pos = c("topright", "topleft"),
+  border = "black",
+  lwd = 0.3,
+  add = TRUE
+)
+
+mf_map(
+  supply_sf,
+  type = "prop",
+  var = "supply",
+  inches = 0.04,
+  col = "red",
+  leg_title = "Childcare capacity",
+  leg_pos = "left",
+  border = NA,
+  add = TRUE
+)
+
+mf_layout(
+  title = "Mean distance from demand locations",
+  credits = "IGEAT-ULB, 2026.",
+  arrow = FALSE,
+  frame = TRUE
+)
+```

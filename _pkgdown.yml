@@ -1,0 +1,19 @@
+url: https://ulb-igeat.github.io/gravitr/
+
+template:
+  bootstrap: 5
+  light-switch: true
+
+navbar:
+  structure:
+    left: [intro, reference, articles]
+    right: [search, github]
+
+
+components:
+  developed_by: "Developed by IGEAT-ULB"
+  examples:
+      text: Examples
+      menu:
+      - text: Childcare accessibility
+        href: articles/childcare-accessibility.html

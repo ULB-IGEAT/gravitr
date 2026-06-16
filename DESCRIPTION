@@ -1,0 +1,23 @@
+Package: gravitr
+Title: Gravity-Based Allocation Models
+Version: 0.9
+Authors@R: 
+    person("Hugo", "Perilleux", email = "hugoperilleux@gmail.com", role = c("aut", "cre"))
+Description: An R package for gravity-model allocation of supply and demand using the Furness convergence algorithm.
+License: CC BY-NC 4.0
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Depends: 
+    R (>= 4.1.0)
+Imports:
+    dplyr
+Suggests:
+    knitr,
+    rmarkdown,
+    phacochr,
+    mapsf,
+    sf
+VignetteBuilder: knitr
+LazyData: true
+Config/roxygen2/version: 8.0.0
+URL: https://ulb-igeat.github.io/gravitr/

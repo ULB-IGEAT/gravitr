@@ -1,0 +1,50 @@
+
+<img src="man/figures/logo_ulb_igeat.png" width="200"  align="right" alt="IGEAT logo">
+
+# gravitR
+
+Gravity-based allocation models for accessibility analysis.
+
+`gravitR` provides tools to allocate supply and demand using gravity
+models and Furness convergence.
+
+## Installation
+
+``` r
+# Install devtools if necessary
+install.packages("devtools")
+
+# Install gravitr
+devtools::install_github("ULB-IGEAT/gravitr")
+```
+
+## Main features
+
+- Distance matrix computation
+- Gravity-based allocation
+- Furness balancing
+- Accessibility indicators
+- Mean travel distance estimation
+
+## Authors
+
+Institute for Environmental Management and Land-Use Planning (IGEAT),
+Université libre de Bruxelles (ULB).
+
+</a> <a href="https://gag.sciences.ulb.be/">
+<img src="man/figures/logo_ulb_igeat.png" align="center" height="120/" alt="IGEAT logo">
+</a>
+</center>
+
+## Other packages
+
+### phacochr
+
+Geocoding and spatial analysis tools for Belgium.
+
+</a> <a href="https://phacochr.github.io/phacochr">
+<img src="man/figures/logo_phacochr.png" align="center" height="120/"  alt="PhacochR logo" >
+</a>
+</center>
+
+<https://phacochr.github.io/phacochr/>
