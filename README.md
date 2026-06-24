@@ -77,7 +77,7 @@ mf_layout(
 )
 ```
 
-![](man/figures/ratio-map-1.png)<!-- -->
+![](man/figures/README-ratio-map-1.png)<!-- -->
 
 ## Gravity-based allocation
 
@@ -174,7 +174,7 @@ mf_layout(
 )
 ```
 
-![](man/figures/gravity-map-1.png)<!-- -->
+![](man/figures/README-gravity-map-1.png)<!-- -->
 
 ## Authors
 
