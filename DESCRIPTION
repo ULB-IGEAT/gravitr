@@ -4,7 +4,13 @@ Version: 0.9
 Authors@R: c(
     person("Hugo", "Perilleux", email = "hugoperilleux@gmail.com", role = c("aut", "cre")),
     person("Pierre", "Marissal", role = c("aut")))
-Description: An R package for gravity-model allocation of supply and demand using the Furness convergence algorithm.
+Description: An R package for gravity-model allocation of supply and demand
+    using the Furness convergence algorithm. The package supports the analysis
+    of spatial accessibility to public services and facilities such as
+    childcare, education, healthcare, sports facilities, and other collective
+    amenities. By accounting for both travel distance and competition for
+    limited resources, it helps identify spatial inequalities in access and
+    evaluate the balance between local demand and available supply.
 License: CC BY-NC 4.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

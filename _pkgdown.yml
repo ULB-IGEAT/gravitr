@@ -9,10 +9,10 @@ navbar:
     left: [intro, reference, examples]
     right: [search, github]
 
-  components:
-    examples:
-      text: Examples
-      href: articles/childcare-accessibility.html
+  # components:
+  #   examples:
+  #     text: Examples
+  #     href: articles/childcare-accessibility.html
 
 footer:
   structure:

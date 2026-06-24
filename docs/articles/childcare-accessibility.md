@@ -7,6 +7,7 @@ library(dplyr)
 library(sf)
 library(mapsf)
 library(phacochr)
+library(gravitr)
 ```
 
 ## Why a simple ratio map is not enough
@@ -14,20 +15,14 @@ library(phacochr)
 A simple ratio map compares the number of childcare places with the
 number of children in each spatial unit. This is easy to read, but it
 assumes that demand is only served locally. This is a strong limitation,
-especially in dense urban areas where families may use childcare places
-outside their own sector.
+especially in dense urban areas where families may use childcare outside
+their own sector.
 
 ``` r
 
 data(ratio_map)
 
 communes_bxl <- phacochr::phaco_data("communes_bxl")
-```
-
-    ## Warning: Vous chargez les communes construites sur base des secteurs 2019-2024
-    ## (Statbel).
-
-``` r
 
 mf_map(ratio_map, col = NA, border = "grey")
 mf_map(communes_bxl, col = NA, border = "black", add = TRUE)
@@ -45,14 +40,6 @@ mf_map(
   lwd = 0.3,
   add = TRUE
 )
-```
-
-    ## 382 '0' values are not plotted on the map.
-
-    ## The use of separated legends for this map type is deprecated.
-    ## Please, use only one value for leg_pos or use mf_legend() to display two legends.
-
-``` r
 
 mf_layout(
   title = "Local ratio of childcare places to children",
@@ -66,8 +53,23 @@ mf_layout(
 
 ## Gravity-based allocation
 
-The gravity model allocates demand to supply according to capacity,
-demand and distance. The initial interaction is defined as:
+The gravity model allocates demand to supply locations according to
+supply capacity, demand levels, and travel distance. Initial
+interactions are estimated using a gravity function:
+
+``` math
+I_{ij} = \frac{S_i * D_j}{d_{ij}^{2}}
+```
+
+where $`S_i`$ is the supply, $`D_j`$ is the demand, and $`d_{ij}`$ is
+the distance between demand and supply locations.
+
+The Furness algorithm then iteratively adjusts these interactions so
+that total allocated demand matches available supply while satisfying
+demand constraints. The resulting allocation reflects both competition
+for limited resources and travel distance, producing an accessibility
+measure that accounts for service saturation and spatial separation
+between users and facilities.
 
 ``` r
 
@@ -84,72 +86,26 @@ allocation <- gravity(
   distance_power = 2,
   max_iter = 100,
   delta = 0.001,
-  verbose = TRUE
+  verbose = FALSE
 )
 ```
 
-    ## Iteration 1 | delta_row = 6463.534322
-
-    ## Iteration 2 | delta_row = 3105.50263
-
-    ## Iteration 3 | delta_row = 1607.829327
-
-    ## Iteration 4 | delta_row = 846.813213
-
-    ## Iteration 5 | delta_row = 443.634178
-
-    ## Iteration 6 | delta_row = 232.103526
-
-    ## Iteration 7 | delta_row = 121.432969
-
-    ## Iteration 8 | delta_row = 63.600367
-
-    ## Iteration 9 | delta_row = 33.342343
-
-    ## Iteration 10 | delta_row = 17.499022
-
-    ## Iteration 11 | delta_row = 9.193671
-
-    ## Iteration 12 | delta_row = 4.835584
-
-    ## Iteration 13 | delta_row = 2.54591
-
-    ## Iteration 14 | delta_row = 1.341994
-
-    ## Iteration 15 | delta_row = 0.707848
-
-    ## Iteration 16 | delta_row = 0.373549
-
-    ## Iteration 17 | delta_row = 0.197371
-
-    ## Iteration 18 | delta_row = 0.104421
-
-    ## Iteration 19 | delta_row = 0.055286
-
-    ## Iteration 20 | delta_row = 0.029299
-
-    ## Iteration 21 | delta_row = 0.015542
-
-    ## Iteration 22 | delta_row = 0.008252
-
-    ## Iteration 23 | delta_row = 0.004385
-
-    ## Iteration 24 | delta_row = 0.002333
-
-    ## Iteration 25 | delta_row = 0.001242
-
-    ## Iteration 26 | delta_row = 0.000662
-
 ## Mean distance from demand locations
+
+The resulting allocation can be used to calculate the average travel
+distance from each demand location. In the case of population-based
+analyses, this indicator can be mapped for each statistical sector.
+
+High average distances generally indicate a local shortage of supply
+relative to demand. Residents in these areas must travel further to
+access services because nearby facilities are insufficient or already
+saturated. Mapping average distances therefore provides a simple way to
+identify spatial inequalities in accessibility and areas where
+additional capacity may be needed.
 
 ``` r
 
 sec_bxl <- phacochr::phaco_data("sec_bxl")
-```
-
-    ## Warning: Vous chargez les secteurs statistique 2019-2024 (Statbel).
-
-``` r
 
 demand_map <- sec_bxl |>
   left_join(allocation$demand, by = c("cd_sector2024" = "id"))
@@ -173,14 +129,6 @@ mf_map(
   lwd = 0.3,
   add = TRUE
 )
-```
-
-    ## 25 'NA' values are not plotted on the map.
-
-    ## The use of separated legends for this map type is deprecated.
-    ## Please, use only one value for leg_pos or use mf_legend() to display two legends.
-
-``` r
 
 mf_map(
   supply_sf,

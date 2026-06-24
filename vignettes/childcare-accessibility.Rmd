@@ -15,13 +15,15 @@ library(dplyr)
 library(sf)
 library(mapsf)
 library(phacochr)
+library(gravitr)
+
 ```
 
 ## Why a simple ratio map is not enough
 
-A simple ratio map compares the number of childcare places with the number of children in each spatial unit. This is easy to read, but it assumes that demand is only served locally. This is a strong limitation, especially in dense urban areas where families may use childcare places outside their own sector.
+A simple ratio map compares the number of childcare places with the number of children in each spatial unit. This is easy to read, but it assumes that demand is only served locally. This is a strong limitation, especially in dense urban areas where families may use childcare outside their own sector.
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 data(ratio_map)
 
 communes_bxl <- phacochr::phaco_data("communes_bxl")
@@ -53,9 +55,17 @@ mf_layout(
 
 ## Gravity-based allocation
 
-The gravity model allocates demand to supply according to capacity, demand and distance. The initial interaction is defined as:
+The gravity model allocates demand to supply locations according to supply capacity, demand levels, and travel distance. Initial interactions are estimated using a gravity function:
 
-```{r}
+$$
+I_{ij} = \frac{S_i * D_j}{d_{ij}^{2}}
+$$
+
+where \(S_i\) is the supply, \(D_j\) is the demand, and \(d_{ij}\) is the distance between demand and supply locations.
+
+The Furness algorithm then iteratively adjusts these interactions so that total allocated demand matches available supply while satisfying demand constraints. The resulting allocation reflects both competition for limited resources and travel distance, producing an accessibility measure that accounts for service saturation and spatial separation between users and facilities.
+
+```{r,message=FALSE, warning=FALSE}
 distance_matrix <- distance_matrix(
   supply = supply,
   demand = demand,
@@ -69,13 +79,17 @@ allocation <- gravity(
   distance_power = 2,
   max_iter = 100,
   delta = 0.001,
-  verbose = TRUE
+  verbose = FALSE
 )
 ```
 
 ## Mean distance from demand locations
 
-```{r}
+The resulting allocation can be used to calculate the average travel distance from each demand location. In the case of population-based analyses, this indicator can be mapped for each statistical sector.
+
+High average distances generally indicate a local shortage of supply relative to demand. Residents in these areas must travel further to access services because nearby facilities are insufficient or already saturated. Mapping average distances therefore provides a simple way to identify spatial inequalities in accessibility and areas where additional capacity may be needed.
+
+```{r,message=FALSE,warning=FALSE}
 sec_bxl <- phacochr::phaco_data("sec_bxl")
 
 demand_map <- sec_bxl |>
