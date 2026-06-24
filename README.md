@@ -47,6 +47,7 @@ with no resident population, even though childcare facilities may be
 located there and serve neighbouring areas.
 
 ``` r
+
 data(ratio_map)
 
 communes_bxl <- phacochr::phaco_data("communes_bxl")
@@ -76,7 +77,7 @@ mf_layout(
 )
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](man/figures/ratio-map-1.png)<!-- -->
 
 ## Gravity-based allocation
 
@@ -173,7 +174,7 @@ mf_layout(
 )
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](man/figures/gravity-map-1.png)<!-- -->
 
 ## Authors
 
