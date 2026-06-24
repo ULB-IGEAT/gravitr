@@ -42,7 +42,9 @@ A simple ratio map compares the number of childcare places with the
 number of children in each spatial unit. This is easy to read, but it
 assumes that demand is only served locally. This is a strong limitation,
 especially in dense urban areas where families may use childcare outside
-their own sector.
+their own sector. In addition, the ratio cannot be calculated in areas
+with no resident population, even though childcare facilities may be
+located there and serve neighbouring areas.
 
 ``` r
 data(ratio_map)
